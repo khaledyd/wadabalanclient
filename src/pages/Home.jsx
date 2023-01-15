@@ -29,7 +29,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      const res = await axios.get("/events");
+      const res = await axiosInstance.get("/events");
       setEvents(res.data);
       console.log(res.data);
     };
