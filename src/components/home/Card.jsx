@@ -10,7 +10,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function MediaCard({ events }) {
-  const PF = "http://localhost:5004/images/";
+  const PF = "https://wadabalan-api.cyclic.app/images/";
   return (
     <Box
       sx={{
