@@ -9,7 +9,7 @@ import Popular from "../components/home/Popular";
 import Footer from "../components/home/Footer";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import {axiosInstance} from ".././config"
+import {axiosInstance} from "../config"
 
 const Vstrong = styled.strong`
   color: #f35588;
@@ -25,7 +25,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      const res = await axiosInstance.get("/api/events", {
+      const res = await axiosInstance.get("/events", {
         withCredentials: true,
       });
       setEvents(res.data);
