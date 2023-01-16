@@ -20,24 +20,19 @@ const Step = styled.h1`
 `;
 
 
-
 const Home = () => {
-
-
-
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
     const fetchEvents = async () => {
-      const res = await axiosInstance.get("/events",{
-        withCredentials: true
+      const res = await axiosInstance.get("/api/events", {
+        withCredentials: true,
       });
       setEvents(res.data);
       console.log(res.data);
     };
     fetchEvents();
   }, []);
-
 
   return (
     <div>
@@ -67,9 +62,6 @@ const Home = () => {
         With the <Vstrong> simple </Vstrong> Steps you can attend event{" "}
       </Step>
       <Steps />
-
-
-    
       <Footer />
     </div>
   );
