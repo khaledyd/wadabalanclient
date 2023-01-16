@@ -5,11 +5,10 @@ import { Button, Typography } from "@mui/material";
 import { padding } from "@mui/system";
 import Mininav from "../components/home/Mininav";
 import { useState } from "react";
-import axios from "axios";
 import { loginStart ,loginSuccess, loginFailure  } from "../Redux/userSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import {axiosInstance} from "../config"
 export default function FormPropsTextFields() {
   const dispatch = useDispatch()
 
@@ -22,13 +21,13 @@ export default function FormPropsTextFields() {
     e.preventDefault();
     dispatch(loginStart());
     try{
-      const res = await axios.post("/auth/signin" , {
+      const res = await axiosInstance.post("/auth/signin" , {
         email,
         password
       })
       dispatch(loginSuccess(res.data))
       navigate("/");
-      console.log(res.data)
+
 
 
 

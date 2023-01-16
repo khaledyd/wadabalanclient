@@ -29,7 +29,7 @@ const Home = () => {
         withCredentials: true,
       });
       setEvents(res.data);
-      console.log(res.data);
+
     };
     fetchEvents();
   }, []);
