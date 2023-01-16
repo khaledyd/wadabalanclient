@@ -1,6 +1,6 @@
 import * as React from "react";
 import dayjs from "dayjs";
-import axios from "axios";
+
 import { lotStart, lotSuccess, lotFailure } from "../Redux/eventSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -19,6 +19,7 @@ import {
   Select,
   Typography,
 } from "@mui/material";
+import { axiosInstance } from "../config";
 import Mininav from "../components/home/Mininav";
 
 export default function BasicDateTimePicker() {
@@ -56,12 +57,12 @@ export default function BasicDateTimePicker() {
       data.append("file", file);
       newEvent.eventImg = filename;
       try {
-        await axios.post("/upload", data);
+        await axiosInstance.post("/upload", data);
       } catch (err) {}
     }
     try {
-      const res = await axios.post("/events", newEvent);
-      console.log(res.data);
+      const res = await axiosInstance.post("/events", newEvent);
+   
       navigate("/");
     } catch (err) {
       dispatch(lotFailure());

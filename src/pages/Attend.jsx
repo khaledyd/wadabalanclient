@@ -13,18 +13,18 @@ import { useNavigate } from "react-router-dom";
 import Ticket from "./Ticket";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
-
+import { axiosInstance } from "../config";
 export default function Attend() {
   const printRef = useRef();
   const navigate = useNavigate();
   const data = [{ name: "", email: "", gender: "" }];
   const location = useLocation();
-  console.log(location);
+
   const path = location.pathname.split("/")[1];
-  console.log(path);
+
 
   const { currentEvent } = useSelector((state) => state.event);
-  console.log(currentEvent);
+
   const [attendees, setAttendees] = useState([
     {
       name: "",
@@ -40,7 +40,7 @@ export default function Attend() {
   const [gender, setGender] = useState([""]);
 
   const array = [ticketdata];
-  console.log(array[0].details);
+
   ///onchange funtion
   const handleChange = (e) => {
     setAttendees((prev) => {
@@ -50,14 +50,14 @@ export default function Attend() {
 
   useEffect(() => {
     const getPost = async () => {
-      const res = await axios.get("/events/" + path);
-      //console.log(res.data);
+      const res = await axiosInstance.get("/events/" + path);
+  
       setTicketData(res.data);
     };
 
     getPost();
   }, [path]);
-  //console.log(ticketdata);
+
   //submit funcion
 
   const handleSubmit = async (e) => {
@@ -69,15 +69,14 @@ export default function Attend() {
     e.preventDefault();
 
     try {
-      const res = await axios.put("/events/userAttend/" + path, attendees);
-      const ress = await axios.post("/auth/sendotp/", { email });
-      console.log(res.data.attendees);
-      console.log(ress.data);
+      const res = await axiosInstance.put("/events/userAttend/" + path, attendees);
+      const ress = await axiosInstance.post("/auth/sendotp/", { email });
+    
       setTicket(true);
       ///res.data && window.location.replace("/EventAttendees");
       //window.location.replace("/post/" + res.data._id);
     } catch (err) {
-      console.log(err);
+
     }
   };
   const id = nanoid();
