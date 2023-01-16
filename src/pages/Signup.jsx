@@ -5,31 +5,26 @@ import { Button, FormControl, Typography } from "@mui/material";
 import { padding } from "@mui/system";
 import Mininav from "../components/home/Mininav";
 import { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
+import { useNavigate } from "react-router-dom";
+import { axiosInstance } from "../config";
 export default function FormPropsTextFields() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState(" ");
   const [confirmPassword, setConfirmPassword] = useState(" ");
 
-
   const handlesubmit = async (e) => {
-
     e.preventDefault();
     try {
-      const res = await axios.post("/auth/signup", {
+      const res = await axiosInstance.post("/auth/signup", {
         fullname,
         email,
         password,
         confirmPassword,
       });
-      console.log(res.data);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
 
   return (
@@ -96,10 +91,13 @@ export default function FormPropsTextFields() {
             </Button>
           </Box>
 
-          <Typography variant="h6" sx={{ fontSize: "20px", marginTop: "10px" , cursor :"pointer" }} onClick ={()=>navigate("/login")}>
+          <Typography
+            variant="h6"
+            sx={{ fontSize: "20px", marginTop: "10px", cursor: "pointer" }}
+            onClick={() => navigate("/login")}
+          >
             log in
           </Typography>
-      
         </Box>
       </Box>
     </Box>
