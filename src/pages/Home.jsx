@@ -29,7 +29,9 @@ const Home = () => {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      const res = await axiosInstance.get("/events");
+      const res = await axiosInstance.get("/events",{
+        withCredentials: true
+      });
       setEvents(res.data);
       console.log(res.data);
     };
